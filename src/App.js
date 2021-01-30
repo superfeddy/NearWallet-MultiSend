@@ -15,8 +15,6 @@ function convertToYoctoNear(amount) {
 
 export default function App() {
     // use React Hooks to store greeting in component state
-    const [greeting, set_greeting] = React.useState()
-
     const [accounts, setAccounts] = React.useState();
     const [total, setTotal] = React.useState();
 
@@ -33,11 +31,6 @@ export default function App() {
             // in this case, we only care to query the contract when signed in
             if (window.walletConnection.isSignedIn()) {
 
-                // window.contract is set by initContract in index.js
-                window.contract.get_greeting({account_id: window.accountId})
-                    .then(greetingFromContract => {
-                        set_greeting(greetingFromContract)
-                    })
             }
         },
 
@@ -100,7 +93,6 @@ export default function App() {
     };
 
 
-
     return (
         // use React Fragment, <>, to avoid wrapping elements in unnecessary divs
         <>
@@ -110,25 +102,21 @@ export default function App() {
             <main>
                 <h1>
                     <label
-                        htmlFor="greeting"
+                        htmlFor="recipients"
                         style={{
                             color: 'var(--secondary)',
-                            borderBottom: '2px solid var(--secondary)'
                         }}
                     >
-                        {greeting}
+                        Testnet Multi-Sender-App
                     </label>
                     {' '/* React trims whitespace around tags; insert literal space character when needed */}
-                    {window.accountId}!
+                    @{window.accountId}
                 </h1>
                 <form onSubmit={async event => {
                     event.preventDefault()
 
                     // get elements from the form using their id attribute
-                    const {fieldset, greeting} = event.target.elements
-
-                    // hold onto new user-entered value from React's SynthenticEvent for use after `await` call
-                    const newGreeting = greeting.value
+                    const {fieldset, recipients} = event.target.elements
 
                     // disable the form while the value gets updated on-chain
                     fieldset.disabled = true
@@ -157,9 +145,6 @@ export default function App() {
                         fieldset.disabled = false
                     }
 
-                    // update local `greeting` variable to match persisted value
-                    set_greeting(newGreeting)
-
                     // show Notification
                     setShowNotification(true)
 
@@ -171,20 +156,19 @@ export default function App() {
                 }}>
                     <fieldset id="fieldset">
                         <label
-                            htmlFor="greeting"
+                            htmlFor="recipients"
                             style={{
                                 display: 'block',
                                 color: 'var(--gray)',
                                 marginBottom: '0.5em'
                             }}
                         >
-                            Change greeting
+                            Send tokens to multiple accounts by one transaction:
                         </label>
                         <div style={{display: 'flex'}}>
               <textarea
-                  autoComplete="off"
-                  defaultValue={greeting}
-                  id="greeting"
+                  id="recipients"
+                  rows={10}
                   onChange={e => parseAccounts(e.target.value)}
                   style={{flex: 1}}
               />
@@ -195,29 +179,24 @@ export default function App() {
                                 Send
                             </button>
                         </div>
+                        <span
+                            style={{
+                                display: 'block',
+                                color: 'var(--gray)',
+                                marginBottom: '0.5em',
+                                marginTop: '0.5em'
+                            }}
+                        >
+                            Send a Near tokens to multiple accounts at the one transaction, put it one line - one account amout pair,
+                            separate account and amount with the blank space:<br /><br />
+                            account1 10<br />
+                            account2 30<br />
+                            account3 40<br />
+                        </span>
                     </fieldset>
                 </form>
-                <p>
-                    Look at that! A Near Multisender app! This greeting is stored on the NEAR blockchain. Check it out:
-                </p>
-                <ol>
-                    <li>
-                        Look in <code>src/App.js</code> and <code>src/utils.js</code> – you'll
-                        see <code>get_greeting</code> and <code>set_greeting</code> being called
-                        on <code>contract</code>. What's this?
-                    </li>
-                    <li>
-                        Ultimately, this <code>contract</code> code is defined in <code>assembly/main.ts</code> – this
-                        is the source code for your <a target="_blank" rel="noreferrer"
-                                                       href="https://docs.near.org/docs/roles/developer/contracts/intro">smart
-                        contract</a>.
-                    </li>
-                    <li>
-                        When you run <code>yarn dev</code>, the code in <code>assembly/main.ts</code> gets deployed to
-                        the NEAR testnet. You can see how this happens by looking in <code>package.json</code> at
-                        the <code>scripts</code> section to find the <code>dev</code> command.
-                    </li>
-                </ol>
+                <hr/>
+                Join Our Telegram Chat: @openwebdev
                 <hr/>
                 <p>
                     To keep learning, check out <a target="_blank" rel="noreferrer" href="https://docs.near.org">the

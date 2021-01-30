@@ -30,12 +30,13 @@ main {
 }
 
 h1 {
-  background-image: url(assets/logo-black.svg);
+  background-image: url(assets/nearc27c19c0.svg);
   background-position: center 1em;
   background-repeat: no-repeat;
   background-size: auto 1.5em;
   margin-top: 0;
-  padding: 3.5em 0 0.5em;
+  margin-bottom: 0;
+  padding-top: 3.0em;
   text-align: center;
 }
 
@@ -113,7 +114,7 @@ button.link {
 
 fieldset {
   border: none;
-  padding: 2em 0;
+  padding: 1em 0;
 }
 
 input {
