@@ -3,10 +3,25 @@ near-multisender-test
 
 This [React] app was initialized with [create-near-app]
 
+**Near DApp** on **Rust and React**: NEAR Multi-Sender-App on NodeJS through React's **create-near-app** module
+
+Project was created according to the
+Zavodil's video tutorial [Программируем dApp за полчаса на Rust и React: NEAR MultiSender на NodeJS через create-near-app](https://www.youtube.com/watch?v=SJhJ1sKjCBI) -
+good way to start to learn programming on NEAR.
+
+Check it out the DEMO-version: https://lytves.github.io/near-multisender-test/
+
+![](img.png)
+
+
+Run Developing Version
+===========
+```
+npm run dev
+```
 
 Quick Start
 ===========
-
 To run this project locally:
 
 1. Prerequisites: Make sure you've installed [Node.js] ≥ 12

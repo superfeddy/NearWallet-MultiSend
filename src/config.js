@@ -1,4 +1,4 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME ||'near-multisender-test'
+const CONTRACT_NAME = process.env.CONTRACT_NAME ||'near-multisender-test.satoshi22.testnet'
 
 function getConfig(env) {
   switch (env) {
